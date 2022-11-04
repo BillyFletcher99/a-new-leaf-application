@@ -41,11 +41,11 @@ const ImageSlider = () => {
           })}
 
           {/* prev / next arrows */}
-            <div id="prev-arrow" className='z-50 -mt-60 m-8 left-arrow float-left selectEnable '>
-              <Icon icon="tabler:arrow-narrow-left"  height="2.5rem" width="2.5rem" className='left-arrow float-left' color='#D1D5DB' onClick={prevSlide}/>
+            <div id="prev-arrow" className='z-50 -mt-60 m-8 left-arrow float-left selectEnable ' onClick={prevSlide}>
+              <Icon icon="tabler:arrow-narrow-left"  height="2.5rem" width="2.5rem" className='left-arrow float-left' color='#D1D5DB'/>
             </div>
-            <div id="prev-arrow" className='z-50 -mt-60 m-8 right-arrow float-right selectEnable '>
-              <Icon icon="tabler:arrow-narrow-right" height="2.5rem" width="2.5rem" className='right-arrow float-right' color='#D1D5DB' onClick={nextSlide}/>
+            <div id="prev-arrow" className='z-50 -mt-60 m-8 right-arrow float-right selectEnable ' onClick={nextSlide}>
+              <Icon icon="tabler:arrow-narrow-right" height="2.5rem" width="2.5rem" className='right-arrow float-right' color='#D1D5DB'/>
             </div>
 
 
