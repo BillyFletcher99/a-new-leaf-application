@@ -50,7 +50,7 @@ const ImageSlider = () => {
 
 
           {/* edit plant Form */}
-          <div id="editForm" className='px-12 pb-12'>     
+          <form id="editForm" className='px-12 pb-12'>     
 
             {/* current age */}
             <div className="whitespace-no-wrap">
@@ -120,7 +120,7 @@ const ImageSlider = () => {
                 </ul>
               </div>
             </div>
-          </div>
+          </form>
 
         </section>
       </div>
