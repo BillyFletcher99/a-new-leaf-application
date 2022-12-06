@@ -6,26 +6,47 @@ const typeDefs = gql`
     name: String
     email: String
     password: String
-    plants: [Plant]
+    plants: [Plant!]
   }
 
   type Plant {
     _id: ID!
-    owner: User
+    owner: User!
     birthDate: String
     nickname: String
-    species: String
+    species: Species
+  }
+
+  type SpeciesInput {
+    common_names: String
+    scientific_name: String
+    synonyms: String
   }
 
   type Query {
     users: [User]!
     user(userId: ID!): User
     plant(_id: ID!): Plant
+    species(SpeciesInput): Species
+    moreSpecies(SpeciesInput): [Species]
   }
 
   type Auth {
     token: ID!
     user: User
+  }
+
+  type Species {
+    _id: ID!
+    common_names: String
+    family: String
+    family_common_name: String
+    gbif: String
+    plantnet: String
+    powo: String
+    scientific_name: String
+    synonyms: String
+    usda: String
   }
 
   type Mutation {
