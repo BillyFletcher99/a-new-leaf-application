@@ -23,8 +23,9 @@ const ImageSlider = () => {
   const [birthday, setBirthday] = useState('');
   const [nickname, setNickname] = useState('');
 
-  async function addPlant () {
+  async function addPlant (e) {
     console.log(addPlant);
+    e.preventDefault()
     //route to main page and push + over 
     const token = Auth.loggedIn() ? Auth.getToken() : null;
 
@@ -33,6 +34,7 @@ const ImageSlider = () => {
     }
 
     try {
+      console.log(birthday,  nickname, image)
       await storePlant({
         variables: {
            birthday,  nickname, image
@@ -152,7 +154,7 @@ const ImageSlider = () => {
               </ul>
             </div>
             <div>
-                <button class="bg-gray-300 mt-4 text-gray-700 font-semibold py-2 px-4 rounded inline-flex items-center" onClick={()=>addPlant()}>Save</button>
+                <button class="bg-gray-300 mt-4 text-gray-700 font-semibold py-2 px-4 rounded inline-flex items-center" onClick={(e)=>addPlant(e)}>Save</button>
                 {redirect ?<Navigate to = "/main"/>:null}
             </div>
           </div>
