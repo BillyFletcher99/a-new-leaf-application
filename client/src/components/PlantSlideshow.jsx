@@ -10,7 +10,7 @@ import { useMutation } from "@apollo/client";
 import Auth from './../utils/auth';
 //Import Plant card
 
-
+const species = "Rose"
 
 const ImageSlider = () => {
   const [storePlant] = useMutation(ADD_PLANT)
@@ -34,10 +34,11 @@ const ImageSlider = () => {
     }
 
     try {
+      const birthDate = birthday
       console.log(birthday,  nickname, image)
       await storePlant({
         variables: {
-           birthday,  nickname, image
+          birthDate,  nickname, species
         },
       });
 
