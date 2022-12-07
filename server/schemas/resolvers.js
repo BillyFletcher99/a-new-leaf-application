@@ -11,8 +11,8 @@ const resolvers = {
     user: async (root, { userId }) => {
       return User.findOne({ _id: userId });
     }, //,
-
-    species: (exports = async function fetchSpecies(source, input) {
+    //changed species to plant
+    plant: (exports = async function fetchSpecies(source, input) {
       const mongodb = context.services.get("mongodb-atlas");
       const species = mongodb.db("a-new-leaf").collection("species");
       // Replace them with your ^^^^ Database Name and your ^^^^ Collection Name

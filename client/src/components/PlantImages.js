@@ -1,10 +1,10 @@
-import Plant2 from "../assets/Plant2.gif";
-import Plant from "../assets/Plant.gif";
-import Plant3 from "../assets/Plant3.gif";
-import Plant4 from "../assets/Plant4.gif";
-import Plant5 from "../assets/Plant5.gif";
-import Plant6 from "../assets/Plant6.gif";
-import Plant7 from "../assets/Plant7.gif";
+const Plant2 = "/assets/Plant2.gif";
+const Plant = "/assets/Plant.gif";
+const Plant3 = "/assets/Plant3.gif";
+const Plant4 = "/assets/Plant4.gif";
+const Plant5 = "/assets/Plant5.gif";
+const Plant6 = "/assets/Plant6.gif";
+const Plant7 = "/assets/Plant7.gif";
 
 export const PlantImages = [
   {

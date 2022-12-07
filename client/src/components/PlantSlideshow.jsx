@@ -5,29 +5,57 @@ import { showNotification, setupTimer,stopNotification,timeOptions } from './Not
 import SearchBar from './SearchBar.jsx';
 import { Icon } from '@iconify/react';
 import { Navigate } from "react-router-dom";
+import { ADD_PLANT } from "../utils/mutations";
+import { useMutation } from "@apollo/client";
+import Auth from './../utils/auth';
 //Import Plant card
 
 
 
-
-
 const ImageSlider = () => {
+  const [storePlant] = useMutation(ADD_PLANT)
   const [current, setCurrent] = useState(0);
   const length = PlantImages.length;
   const [redirect, setRedirect ] = useState(false)
 
-  function addPlant (){
+  //Save plant info 
+  const [image, setImage] = useState(PlantImages[current]);
+  const [birthday, setBirthday] = useState('');
+  const [nickname, setNickname] = useState('');
+
+  async function addPlant () {
     console.log(addPlant);
     //route to main page and push + over 
+    const token = Auth.loggedIn() ? Auth.getToken() : null;
+
+    if (!token) {
+      return false;
+    }
+
+    try {
+      await storePlant({
+        variables: {
+           birthday,  nickname, image
+        },
+      });
+
+      // if plant successfully saves to user's account, save plant id to state
+      //setSavedBookIds([...savedBookIds, bookToSave.bookId]);
+    } catch (err) {
+      console.error(err);
+    }
+
     setRedirect(true)
   }
 
   const nextSlide = () => {
     setCurrent(current === length - 1 ? 0 : current + 1);
+    setImage(PlantImages[current])
   };
 
   const prevSlide = () => {
     setCurrent(current === 0 ? length - 1 : current - 1);
+    setImage(PlantImages[current])
   };
 
   if (!Array.isArray(PlantImages) || PlantImages.length <= 0) {
@@ -63,16 +91,16 @@ const ImageSlider = () => {
           {/* current age */}
           <div className="whitespace-no-wrap">
           <label htmlFor="plantAge">
-            <h1 className="font-bold text-zinc-400 text-sm pb-2 whitespace-no-wrap"><Icon icon="tabler:cake" inline={true} color="#9ca3af" />1.2 yrs</h1>            
-            <input className="placeholder:italic text-zinc-400 text-lg block bg-white w-30 border border-slate-300 rounded-md py-2 pl-9 pr-3 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 invalid:border-red-500 focus:ring-1 " type="date" name="bday" required pattern="\d{4}-\d{2}-\d{2}">
+            <h1 className="font-bold text-zinc-400 text-sm pb-2 whitespace-no-wrap"><Icon icon="tabler:cake" inline={true} color="#9ca3af" />Birthday</h1>            
+            <input className="placeholder:italic text-zinc-400 text-lg block bg-white w-30 border border-slate-300 rounded-md py-2 pl-9 pr-3 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 invalid:border-red-500 focus:ring-1 " type="date" name="bday" required pattern="\d{4}-\d{2}-\d{2}" value={birthday} onChange={ e => setBirthday(e.target.value)}>
             </input>
           </label>
           </div>
 
           {/* current name */}
           <label htmlFor="plantNSame">
-            <p className='text-zinc-400 text-lg'>Hercules</p>
-            <input className="placeholder:italic placeholder:text-zinc-400 text-lg block bg-white w-30 border border-slate-300 rounded-md py-2 pl-9 pr-3 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 invalid:border-red-500 focus:ring-1 " placeholder="Hercules" type="text" name="search"/>
+            <p className='text-zinc-400 text-lg'>Nickname</p>
+            <input className="placeholder:italic placeholder:text-zinc-400 text-lg block bg-white w-30 border border-slate-300 rounded-md py-2 pl-9 pr-3 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 invalid:border-red-500 focus:ring-1 " placeholder="Hercules" type="text" name="search" value={nickname} onChange={e => setNickname(e.target.value)}/>
           </label>    
 
           {/* selected species */}
